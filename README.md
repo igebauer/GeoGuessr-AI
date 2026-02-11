@@ -34,8 +34,8 @@ Built with PyTorch and ResNet-50, this project includes real-time screen capture
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/geoguessr-ai.git
-cd geoguessr-ai
+git clone https://github.com/igebauer/GeoGuessr-AI.git
+cd GeoGuessr-AI
 
 # Install dependencies
 pip install -r requirements.txt
@@ -54,7 +54,7 @@ Train on Google Colab (free GPU - recommended):
 ### Real-time Mode (Automatic Screen Capture)
 
 ```bash
-python geoguessr_realtime.py
+python geoguessr_realtime.py --model data/best_model.pth --labels data/label_mapping.json
 ```
 
 1. Select the game area
@@ -62,6 +62,20 @@ python geoguessr_realtime.py
 3. AI updates automatically as you play!
 
 Combines multiple views as you look around for **70-85% accuracy**!
+
+## Model & Data
+
+This repo does **not** contain datasets or large model weights.
+
+- To run locally, place your model and label mapping in `data/`:
+  - `data/best_model.pth`
+  - `data/label_mapping.json`
+
+Or use the helper script to download hosted files:
+```bash
+pip install gdown
+python scripts/download_weights.py
+```
 
 
 ## Project Structure

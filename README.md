@@ -1,6 +1,31 @@
 # GeoGuessr-AI
 
-**GeoGuessr-AI** — a research/demo project that uses image-based deep learning to predict the country displayed in Google Street View-style images and *accumulates multiple views* to form a stronger guess. Built with PyTorch and a lightweight GUI overlay for real-time inference while you move in the game.
+A deep learning project that predicts geographic location from street-level imagery using convolutional neural networks.
+
+This project simulates a real-world computer vision + inference pipeline similar to systems used in:
+- autonomous navigation
+- satellite imagery analysis
+- quantitative alternative data research
+
+Built as an end-to-end ML system, including:
+- dataset preprocessing
+- model training
+- real-time inference
+- deployment-ready prediction pipeline
+
+---
+
+## Why This Project Matters
+
+Image-based geolocation is a challenging high-dimensional prediction problem requiring:
+
+- large-scale data handling
+- feature extraction from noisy visual inputs
+- probabilistic classification
+- real-time inference optimization
+
+This project demonstrates the ability to design and implement a full ML
+pipeline from raw data to a deployable inference system.
 
 ---
 
@@ -33,21 +58,17 @@ cd GeoGuessr-AI
 2. Install dependencies
 ```bash
 pip install -r requirements.txt
-# If you plan to use the provided downloader:
-pip install gdown
 ```
 
 3. Place model & labels (local or download):
-- Local: put best_model.pth and label_mapping.json into data/ (create the folder).
-- Or use the helper script:
-```bash
-python scripts/download_weights.py
-```
+- Place dataset in data/ folder and unzip (download instructions at the bottom)
+- Local: put best_model.pth and label_mapping.json into data/ (create the folder)
 
 4. Run the real-time overlay:
 ```bash
 python geoguessr_realtime.py --model data/best_model.pth --labels data/label_mapping.json
 ```
+
 Controls (overlay window):
 - SPACE — Start/Stop predictions
 - R — Reset accumulation (new location)
@@ -55,15 +76,40 @@ Controls (overlay window):
 - + / - — Adjust update interval
 - ESC — Quit
 
+## Training the Model
+
+The model is trained using the provided Jupyter notebook:
+
+Geolocation_Training_Colab.ipynb
+
+This notebook:
+- Downloads and preprocesses the dataset
+- Creates country labels
+- Trains a ResNet50-based classifier in PyTorch
+- Saves trained weights and label mappings
+
+### How to train yourself
+
+1. Open the notebook in Google Colab:
+   - Upload Geolocation_Training_Colab.ipynb
+   - Enable GPU (Runtime → Change runtime → GPU)
+2. Download dataset from Kaggle (instructions at bottom)
+3. Update dataset paths in notebook if needed
+4. Run all cells
+
+After training completes, download:
+- best_model.pth
+- label_mapping.json
+
+Place them into:
+data/
+
 ## Model & Data
 
 This repository intentionally does not include model weights or datasets.
 
-Recommended hosting options:
-- Hugging Face Hub for models (recommended)
-- Google Drive / S3 for datasets (use scripts/download_weights.py)
-
 Place these files in data/:
+- dataset zip file
 - best_model.pth — PyTorch model checkpoint
 - label_mapping.json — mapping from class index to country name
 
@@ -72,10 +118,9 @@ Place these files in data/:
 ```
 GeoGuessr-AI/
 ├── geoguessr_realtime.py     # Real-time overlay + app (refactored)
-├── scripts/
-│   └── download_weights.py   # Helper downloader for large assets
 ├── data/                     # gitignored — local models / data go here
 ├── notebooks/                # Clean notebooks (outputs stripped)
+|  └── Geolocation_Training_Colab
 ├── requirements.txt
 ├── README.md
 ├── LICENSE
@@ -109,6 +154,7 @@ Best guess: France
 - Compare backbone choices (ResNet-50 vs. CLIP / ViT).
 - Add map visualization (lat/long predictions) and a small technical appendix showing feature engineering.
 - Add unit tests and a small benchmark for inference speed (FPS).
+- Larger dataset scaling
 
 ## Contributing & License
 

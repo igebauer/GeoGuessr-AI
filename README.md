@@ -37,7 +37,7 @@ pipeline from raw data to a deployable inference system.
 
 ---
 
-## Performance
+## Performance and Images
 (validation, see notebooks/Geolocation_Training_Colab.ipynb for exact evaluation)
 
 | Metric | Score |
@@ -47,6 +47,11 @@ pipeline from raw data to a deployable inference system.
 | Countries | 124 |
 | Training Images | ~50k |
 | Model | ResNet-50 |
+
+### Correct guess examples in the US, Japan, and New Zealand
+![USA Correct Guess](images/USA_correct_guess.png)
+![Japan Correct Guess](images/Japan_correct_guess.png)
+![New Zealand Correct Guess](images/New_Zealand_correct_guess.png)
 
 ## Quick start
 

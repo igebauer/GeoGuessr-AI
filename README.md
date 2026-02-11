@@ -1,20 +1,16 @@
-# GeoGuessr AI - Street View Country Classifier
+# GeoGuessr-AI
 
-A deep learning model that predicts countries from Google Street View images, achieving **48% top-1 accuracy** across 124 countries (60x better than random guessing).
+**GeoGuessr-AI** — a research/demo project that uses image-based deep learning to predict the country displayed in Google Street View-style images and *accumulates multiple views* to form a stronger guess. Built with PyTorch and a lightweight GUI overlay for real-time inference while you move in the game.
 
-Built with PyTorch and ResNet-50, this project includes real-time screen capture capabilities for live predictions while playing GeoGuessr.
+---
 
-![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
-![PyTorch](https://img.shields.io/badge/pytorch-2.0+-red.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+## Key highlights
+- **Task:** Predict country from street-view images using a CNN backbone (ResNet-50).
+- **Method:** Aggregates predictions from multiple frames using weighted averaging, max-vote, and consensus strategies to increase robustness.
+- **Realtime demo:** Tkinter overlay captures game window and shows current + accumulated guesses with confidence.
+- **Engineering:** Clean, modular Python with a downloader helper to keep large files out of Git history.
 
-## Features
-
-- **Deep CNN model** trained on 50,000 Street View images from 124 countries
-- **Real-time prediction** - watches your screen while you play GeoGuessr
-- **Smart accumulation mode** - combines multiple views for better accuracy
-- **Class-balanced training** - handles dataset imbalance
-- **Top-5 accuracy: ~80%** - correct country in top 5 predictions
+---
 
 ## Performance
 
@@ -26,72 +22,72 @@ Built with PyTorch and ResNet-50, this project includes real-time screen capture
 | Training Images | ~50k |
 | Model | ResNet-50 |
 
-**Note:** 48% accuracy on 124 countries is **60x better than random guessing** (0.8%).
+## Quick start
 
-## Quick Start
-
-### Installation
-
+1. Clone:
 ```bash
-# Clone the repository
 git clone https://github.com/igebauer/GeoGuessr-AI.git
 cd GeoGuessr-AI
+```
 
-# Install dependencies
+2. Install dependencies
+```bash
 pip install -r requirements.txt
-```
-
-### Train Your Own Model
-
-Train on Google Colab (free GPU - recommended):
-1. Open `Geolocation_Training_Colab.ipynb` in Google Colab
-2. Upload your dataset to Google Drive
-3. Run all cells
-4. Download trained model
-
-## Usage
-
-### Real-time Mode (Automatic Screen Capture)
-
-```bash
-python geoguessr_realtime.py --model data/best_model.pth --labels data/label_mapping.json
-```
-
-1. Select the game area
-2. Press SPACE to start
-3. AI updates automatically as you play!
-
-Combines multiple views as you look around for **70-85% accuracy**!
-
-## Model & Data
-
-This repo does **not** contain datasets or large model weights.
-
-- To run locally, place your model and label mapping in `data/`:
-  - `data/best_model.pth`
-  - `data/label_mapping.json`
-
-Or use the helper script to download hosted files:
-```bash
+# If you plan to use the provided downloader:
 pip install gdown
+```
+
+3. Place model & labels (local or download):
+- Local: put best_model.pth and label_mapping.json into data/ (create the folder).
+- Or use the helper script:
+```bash
 python scripts/download_weights.py
 ```
 
+4. Run the real-time overlay:
+```bash
+python geoguessr_realtime.py --model data/best_model.pth --labels data/label_mapping.json
+```
+Controls (overlay window):
+- SPACE — Start/Stop predictions
+- R — Reset accumulation (new location)
+- M — Cycle aggregation method (Weighted Avg / Max Vote / Consensus)
+- + / - — Adjust update interval
+- ESC — Quit
+
+## Model & Data
+
+This repository intentionally does not include model weights or datasets.
+
+Recommended hosting options:
+- Hugging Face Hub for models (recommended)
+- Google Drive / S3 for datasets (use scripts/download_weights.py)
+
+Place these files in data/:
+- best_model.pth — PyTorch model checkpoint
+- label_mapping.json — mapping from class index to country name
 
 ## Project Structure
 
 ```
-geoguessr-ai/
-├── geoguessr_realtime.py              # Smart accumulation mode
-├── requirements.txt                # Dependencies
-├── Geolocation_Training_Colab.ipynb # Google Colab notebook
+GeoGuessr-AI/
+├── geoguessr_realtime.py     # Real-time overlay + app (refactored)
+├── scripts/
+│   └── download_weights.py   # Helper downloader for large assets
+├── data/                     # gitignored — local models / data go here
+├── notebooks/                # Clean notebooks (outputs stripped)
+├── requirements.txt
+├── README.md
+├── LICENSE
+├── .gitignore
+└── .gitattributes
 ```
 
-## How It Works
+## How it works (short)
 
-**Model:** ResNet-50 CNN pretrained on ImageNet  
-**Training:** 20 epochs on 50K images  
-**Features learned:** Architecture, vegetation, roads, signs, landscape
+1. Model predicts a probability distribution over classes for each captured frame.
+2. PredictionAccumulator stores recent predictions (configurable window) and computes an aggregated ranking using the selected method.
+3. Overlay GUI (Tkinter) displays both current-view probabilities and accumulated decisions with confidence.
 
 ## Example Results
 
@@ -107,16 +103,17 @@ Analyzing: street_view.jpg
 Best guess: France
 ```
 
-## Contributing
+## Ideas to improve / metrics to add
 
-Contributions welcome! See areas for improvement in the full README.
+- Report Top-1 / Top-5 accuracy on validation set and median error distance (km).
+- Compare backbone choices (ResNet-50 vs. CLIP / ViT).
+- Add map visualization (lat/long predictions) and a small technical appendix showing feature engineering.
+- Add unit tests and a small benchmark for inference speed (FPS).
 
-## License
+## Contributing & License
 
-MIT License - See [LICENSE](LICENSE)
+Open-source MIT-style license (see LICENSE). Pull requests welcome - please keep large data/model files out of the repo.
 
 ## Disclaimer
 
 Educational purposes only. Respect Google Street View and GeoGuessr terms of service.
-
----

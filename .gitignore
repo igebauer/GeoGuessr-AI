@@ -35,7 +35,6 @@ streetview_data/
 dataset/
 data/*
 !data/README.md
-!data/label_mapping.json
 datasets/
 compressed_dataset/
 

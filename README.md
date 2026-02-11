@@ -62,7 +62,7 @@ pip install -r requirements.txt
 
 3. Place model & labels (local or download):
 - Place dataset in data/ folder and unzip (download instructions at the bottom)
-- Local: put best_model.pth and label_mapping.json into data/ (create the folder)
+- Local: put best_model.pth and label_mapping.json into data/ (Training instructions below)
 
 4. Run the real-time overlay:
 ```bash
@@ -94,10 +94,10 @@ This notebook:
    - Upload Geolocation_Training_Colab.ipynb
    - Enable GPU (Runtime → Change runtime → GPU)
 2. Download dataset from Kaggle (instructions at bottom)
-3. Update dataset paths in notebook if needed
+3. Update dataset paths in the notebook if needed
 4. Run all cells
 
-After training completes, download:
+After training completes, download from Google Drive (in geolocalization_model directory):
 - best_model.pth
 - label_mapping.json
 

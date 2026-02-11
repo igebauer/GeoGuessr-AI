@@ -33,7 +33,8 @@ wheels/
 # Data directories (too large for GitHub)
 streetview_data/
 dataset/
-data/
+data/*
+!data/README.md
 datasets/
 compressed_dataset/
 

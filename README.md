@@ -114,6 +114,26 @@ Best guess: France
 
 Open-source MIT-style license (see LICENSE). Pull requests welcome - please keep large data/model files out of the repo.
 
+## Dataset
+
+This project uses the **GeoGuessr Image Dataset (50k images)** from Kaggle:
+
+https://www.kaggle.com/datasets/ubitquitin/geolocation-geoguessr-images-50k
+
+The dataset is not included in this repository due to size and licensing.
+
+To download:
+1. Create a free Kaggle account
+2. Install Kaggle CLI:
+   pip install kaggle
+3. Run:
+   kaggle datasets download -d ubitquitin/geolocation-geoguessr-images-50k
+4. Unzip into:
+   data/
+
+Dataset credit goes to the original Kaggle uploader.
+Used for educational and research purposes only.
+
 ## Disclaimer
 
 Educational purposes only. Respect Google Street View and GeoGuessr terms of service.

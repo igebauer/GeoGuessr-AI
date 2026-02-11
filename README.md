@@ -38,10 +38,11 @@ pipeline from raw data to a deployable inference system.
 ---
 
 ## Performance
+(validation, see notebooks/Geolocation_Training_Colab.ipynb for exact evaluation)
 
 | Metric | Score |
 |--------|-------|
-| Top-1 Accuracy | 48.1% |
+| Top-1 Accuracy | ~48.1% |
 | Top-5 Accuracy | ~80% |
 | Countries | 124 |
 | Training Images | ~50k |

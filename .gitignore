@@ -1,0 +1,108 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# PyTorch
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+
+# Data directories (too large for GitHub)
+streetview_data/
+dataset/
+data/
+datasets/
+compressed_dataset/
+
+# Model directories
+geolocation_model/
+models/
+checkpoints/
+*.pth.tar
+
+# Large files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Training outputs
+runs/
+logs/
+tensorboard/
+wandb/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.DS_Store
+Thumbs.db
+
+# Environment
+venv/
+env/
+ENV/
+.venv
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.cache
+
+# Secrets
+.env
+secrets.json
+config_private.py
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Keep these
+!requirements.txt
+!README.md
+!LICENSE
+!.gitignore

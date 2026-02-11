@@ -53,6 +53,8 @@ pipeline from raw data to a deployable inference system.
 ![Japan Correct Guess](images/Japan_correct_guess.png)
 ![New Zealand Correct Guess](images/New_Zealand_correct_guess.png)
 
+---
+
 ## Quick start
 
 1. Clone:
